@@ -1,0 +1,19 @@
+{
+  "name": "to-market",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephjaniga/to-market.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephjaniga/to-market/issues"
+  },
+  "homepage": "https://github.com/josephjaniga/to-market#readme"
+}

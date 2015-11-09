@@ -1,7 +1,5 @@
-module.exports = function() {
-    return {
-        oink: ()=>{
-            console.log("oink");
-        }
-    };
+module.exports = {
+    oink: ()=>{
+        console.log("oink");
+    }
 };

@@ -1,6 +1,6 @@
 "use strict";
 
-var Game = require('Game.class');
+var Game = require('./lib/Game.class.js');
 
 module.exports = (()=>{
     return new Game();

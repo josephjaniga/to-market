@@ -1,7 +1,7 @@
 "use strict";
 
-var Game = require('./lib/Game.class.js');
+var GameServer = require('./lib/GameServer.class.js');
 
 module.exports = (()=>{
-    return new Game();
+    return new GameServer({port: process.env.PORT});
 })();

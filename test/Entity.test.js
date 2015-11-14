@@ -70,13 +70,10 @@ describe("Entity", ()=>{
     });
 
     it('addComponents should be called once without passing components', ()=>{
-        // spy to watch
-        var options = {game: "Game", components:[]};
-
-        sinon.stub(Entity, 'addComponents');
-
-        var entity = new Entity(options);
-
-        Entity.addComponents.called.should.be.true;
+        var addComponentsSpy = sinon.spy();
+            Entity.prototype.addComponents = addComponentsSpy;
+        var entity = new Entity({});
+        addComponentsSpy.called.should.be.true;
     });
+
 });

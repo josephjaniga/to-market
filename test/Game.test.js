@@ -68,7 +68,7 @@ describe("Game", ()=>{
         expect(result).to.equal(needleEntity);
     });
 
-    it('getComponentByName accurately returns null for not found components', ()=>{
+    it('GetComponent accurately returns null for not found components', ()=>{
         var game = new Game();
         var result = game.getEntityByName("Robotron");
         expect(result).to.be.null;

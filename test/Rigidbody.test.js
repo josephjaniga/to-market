@@ -9,6 +9,7 @@ chai.should();
 describe("Rigidbody", ()=>{
 
     it('should be an instance of a Rigidbody class', ()=>{
+
         var rigidbody = new Rigidbody({});
         expect(rigidbody).to.be.an.instanceOf(Rigidbody);
     });

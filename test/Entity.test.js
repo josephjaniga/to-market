@@ -54,18 +54,18 @@ describe("Entity", ()=>{
         updateSpy.called.should.be.true;
     });
 
-    it('getComponentByName accurately returns existing component', ()=>{
+    it('GetComponent accurately returns existing component', ()=>{
         var needleComponent = {name: "Needle"},
             options = {game: "Game", components:[needleComponent]},
             entity = new Entity(options),
-            result = entity.getComponentByName("Needle");
+            result = entity.GetComponent("Needle");
         expect(result).to.equal(needleComponent);
     });
 
-    it('getComponentByName accurately returns null for not found components', ()=>{
+    it('GetComponent accurately returns null for not found components', ()=>{
         var options = {game: "Game", components:[]},
             entity = new Entity(options),
-            result = entity.getComponentByName("Sassafrass");
+            result = entity.GetComponent("Sassafrass");
         expect(result).to.be.null;
     });
 

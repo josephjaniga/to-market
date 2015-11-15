@@ -25,7 +25,9 @@ describe("Physics", ()=>{
 
     it('should have an gravity value set to 10', ()=>{
         var physics = new Physics({});
-        expect(physics).to.have.property("gravityValue").to.equal(10);
+        expect(physics).to.have.property("gravity").to.be.an('object');
+        expect(physics.gravity).to.have.property('x');
+        expect(physics.gravity).to.have.property('y');
     });
 
 });

@@ -29,7 +29,7 @@ module.exports = {
     InputState,
     Physics,
     Renderer,
-    Rigidbody
+    Rigidbody,
     Time,
     Transform
 };

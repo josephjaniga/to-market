@@ -19,7 +19,7 @@ describe("GameServer", ()=>{
         expect(gameServer).to.have.property('clients').to.be.an('object');
     });
 
-    it('onConnection should call connection event and socket on x2', ()=>{
+    xit('onConnection should call connection event and socket on x2', ()=>{
         var onSpy = sinon.spy(),
             cSpy = sinon.spy(),
             socketMock = {on: onSpy},

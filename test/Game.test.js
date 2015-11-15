@@ -46,7 +46,7 @@ describe("Game", ()=>{
             spyEntity = {name: "SpyEntity", Update: updateSpy};
         var game = new Game();
         game.addEntities([spyEntity]);
-        game.Update();
+        game.Update(game);
         updateSpy.called.should.be.true;
     });
 
@@ -56,7 +56,7 @@ describe("Game", ()=>{
             TimeSpy = {name: "SpyEntity", step: updateSpy};
         var game = new Game();
         game.Time = TimeSpy;
-        game.Update();
+        game.Update(game);
         updateSpy.called.should.be.true;
     });
 

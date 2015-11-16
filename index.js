@@ -18,6 +18,7 @@ var Client = require('./lib/Client.class.js'),
 // these will be specific to each individual game but probably do not belong in a library
 var CharacterMotion = require('./lib/_CharacterMotion.class.js');
 
+
 module.exports = {
     CharacterMotion,
     Client,

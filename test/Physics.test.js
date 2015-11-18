@@ -30,4 +30,20 @@ describe("Physics", ()=>{
         expect(physics.gravity).to.have.property('y');
     });
 
+    it('should intersect perpendicular segments AB=(0,0)->(3,3) CD=(0,3)->(3,0)', ()=>{
+        var P = new Physics({});
+        var lineOne = {start: {x:0, y:0}, end: {x:3, y:3}},
+            lineTwo = {start: {x:0, y:3}, end: {x:3, y:0}};
+        var i = P.isIntersect(lineOne.start, lineOne.end, lineTwo.start, lineTwo.end);
+        expect(i).to.be.true;
+    });
+
+    it('should not intersect parallel lines AB=(0,0)->(3,3) CD=(3,3)->(6,6)', ()=>{
+        var P = new Physics({});
+        var lineOne = {start: {x:0, y:0}, end: {x:3, y:3}},
+            lineTwo = {start: {x:3, y:3}, end: {x:6, y:6}};
+        var i = P.isIntersect(lineOne.start, lineOne.end, lineTwo.start, lineTwo.end);
+        expect(i).to.be.false;
+    });
+
 });

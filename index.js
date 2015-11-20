@@ -18,19 +18,34 @@ var Client = require('./lib/Client.class.js'),
 // these will be specific to each individual game but probably do not belong in a library
 var CharacterMotion = require('./lib/_CharacterMotion.class.js');
 
+//module.exports = {
+//    CharacterMotion,
+//    Client,
+//    Collider,
+//    Component,
+//    Entity,
+//    Game,
+//    GameServer,
+//    InputState,
+//    Physics,
+//    Renderer,
+//    Rigidbody,
+//    Time,
+//    Transform
+//};
 
-module.exports = {
-    CharacterMotion,
-    Client,
-    Collider,
-    Component,
-    Entity,
-    Game,
-    GameServer,
-    InputState,
-    Physics,
-    Renderer,
-    Rigidbody,
-    Time,
-    Transform
+module.exports = ()=>{
+    global.CharacterMotion = CharacterMotion;
+    global.Client = Client;
+    global.Collider = Collider;
+    global.Component = Component;
+    global.Entity = Entity;
+    global.Game = Game;
+    global.GameServer = GameServer;
+    global.InputState = InputState;
+    global.Physics = Physics;
+    global.Renderer = Renderer;
+    global.Rigidbody = Rigidbody;
+    global.Time = Time;
+    global.Transform = Transform;
 };

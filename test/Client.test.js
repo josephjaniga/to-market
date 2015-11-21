@@ -1,7 +1,6 @@
 var chai = require('chai'),
     expect = chai.expect,
-    Client = require('./../lib/Client.class.js'),
-    InputState = require('./../lib/InputState.class.js');
+    Client = require('./../lib/Client.class.js');
 
 chai.should();
 

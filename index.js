@@ -7,7 +7,6 @@ var Client = require('./lib/Client.class.js'),
     Entity = require('./lib/Entity.class.js'),
     Game = require('./lib/Game.class.js'),
     GameServer = require('./lib/GameServer.class.js'),
-    InputState = require('./lib/InputState.class.js'),
     Physics = require('./lib/Physics.class.js'),
     PhysicsEntity = require('./lib/PhysicsEntity.class.js'),
     Renderer = require('./lib/Renderer.class.js'),
@@ -32,7 +31,6 @@ module.exports = ()=>{
     global.Entity = Entity;
     global.Game = Game;
     global.GameServer = GameServer;
-    global.InputState = InputState;
     global.Physics = Physics;
     global.PhysicsEntity = PhysicsEntity;
     global.Renderer = Renderer;

@@ -9,6 +9,7 @@ var Client = require('./lib/Client.class.js'),
     GameServer = require('./lib/GameServer.class.js'),
     InputState = require('./lib/InputState.class.js'),
     Physics = require('./lib/Physics.class.js'),
+    PhysicsEntity = require('./lib/PhysicsEntity.class.js'),
     Renderer = require('./lib/Renderer.class.js'),
     Rigidbody = require('./lib/Rigidbody.class.js'),
     Time = require('./lib/Time.class.js'),
@@ -18,24 +19,11 @@ var Client = require('./lib/Client.class.js'),
 // these will be specific to each individual game but probably do not belong in a library
 var CharacterMotion = require('./lib/_CharacterMotion.class.js');
 
-//module.exports = {
-//    CharacterMotion,
-//    Client,
-//    Collider,
-//    Component,
-//    Entity,
-//    Game,
-//    GameServer,
-//    InputState,
-//    Physics,
-//    Renderer,
-//    Rigidbody,
-//    Time,
-//    Transform
-//};
-
 module.exports = ()=>{
+    // User Implemented... should be split out eventually
     global.CharacterMotion = CharacterMotion;
+
+    // Core
     global.Client = Client;
     global.Collider = Collider;
     global.Component = Component;
@@ -44,6 +32,7 @@ module.exports = ()=>{
     global.GameServer = GameServer;
     global.InputState = InputState;
     global.Physics = Physics;
+    global.PhysicsEntity = PhysicsEntity;
     global.Renderer = Renderer;
     global.Rigidbody = Rigidbody;
     global.Time = Time;

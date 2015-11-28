@@ -16,6 +16,6 @@ describe("Client", ()=>{
     });
 
     it('should have an InputState member', ()=>{
-        expect(clientInstance.inputState).to.be.an.instanceof(InputState);
+        expect(clientInstance.input).to.be.an("object");
     });
 });

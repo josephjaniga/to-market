@@ -50,19 +50,15 @@ describe("GameServer", ()=>{
         expect(gameServer).to.have.property('clients').to.be.empty;
         gameServer.clients["1234"] = {
             id: "1234",
-            inputState: {
-                Input:{
-                    Keys:false
-                }
-            }
+            input: false
         };
         expect(gameServer.clients).have.property("1234");
-        expect(gameServer.clients["1234"].inputState.Input.Keys).to.be.false;
+        expect(gameServer.clients["1234"].input).to.be.false;
 
         gameServer.keyStateChange(true, {id:"1234"});
         expect(gameServer).to.have.property('clients').to.not.be.empty;
         expect(gameServer.clients).have.property("1234");
-        expect(gameServer.clients["1234"].inputState.Input.Keys).to.be.true;
+        expect(gameServer.clients["1234"].input).to.be.true;
     });
 
 });

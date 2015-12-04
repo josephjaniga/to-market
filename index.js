@@ -12,7 +12,8 @@ var Client = require('./lib/Client.class.js'),
     Renderer = require('./lib/Renderer.class.js'),
     Rigidbody = require('./lib/Rigidbody.class.js'),
     Time = require('./lib/Time.class.js'),
-    Transform = require('./lib/Transform.class.js');
+    Transform = require('./lib/Transform.class.js'),
+    Quadtree = require('./lib/Quadtree.class.js');
 
 // user implemented classes? this should go in the implementation of the game
 // these will be specific to each individual game but probably do not belong in a library
@@ -41,4 +42,5 @@ module.exports = ()=>{
     global.Rigidbody = Rigidbody;
     global.Time = Time;
     global.Transform = Transform;
+    global.Quadtree = Quadtree;
 };

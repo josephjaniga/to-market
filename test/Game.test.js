@@ -2,6 +2,7 @@ var chai = require('chai'),
     sinon = require('sinon'),
     expect = chai.expect,
     assert = chai.assert,
+    Entity = require('./../lib/Entity.class.js'),
     Game = require('./../lib/Game.class.js'),
     Physics = require('./../lib/Physics.class.js'),
     Time = require('./../lib/Time.class.js');
@@ -43,7 +44,8 @@ describe("Game", ()=>{
     it('update method should call Update of all its child components', ()=>{
         // spy to watch
         var updateSpy = sinon.spy(),
-            spyEntity = {name: "SpyEntity", Update: updateSpy};
+            spyEntity = new Entity({name:"SpyEntity"});
+        spyEntity.Update = updateSpy;
         var game = new Game();
         game.addEntities([spyEntity]);
         game.Update(game);

@@ -1,4 +1,9 @@
 "use strict";
+
+// SHIMS ------------------------------
+var global = window;
+function setImmediate(){}
+
 // Component.class.js ------------------------------
 
 class Component{

@@ -214,7 +214,11 @@ countsArray = countsArray.sort((a, b)=>{
 console.log(countsArray);
 
 // WRITE to clear
-fs.writeFileSync("bundle.js", '"use strict";\n');
+fs.writeFileSync("bundle.js", '"use strict";\n\n');
+
+fs.appendFileSync("bundle.js", "// SHIMS ------------------------------\n");
+fs.appendFileSync("bundle.js", "var global = window;\n");
+fs.appendFileSync("bundle.js", "function setImmediate(){}\n\n");
 
 countsArray.forEach((file)=>{
 

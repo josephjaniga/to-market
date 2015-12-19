@@ -10,6 +10,7 @@ var Client = require('./lib/Client.class.js'),
     Physics = require('./lib/Physics.class.js'),
     PhysicsEntity = require('./lib/PhysicsEntity.class.js'),
     Renderer = require('./lib/Renderer.class.js'),
+    Revivable = require('./lib/Revivable.class.js'),
     Rigidbody = require('./lib/Rigidbody.class.js'),
     Time = require('./lib/Time.class.js'),
     Transform = require('./lib/Transform.class.js'),
@@ -41,6 +42,7 @@ module.exports = ()=>{
     global.Physics = Physics;
     global.PhysicsEntity = PhysicsEntity;
     global.Renderer = Renderer;
+    global.Revivable = Revivable;
     global.Rigidbody = Rigidbody;
     global.Time = Time;
     global.Transform = Transform;

@@ -2,16 +2,45 @@
 
 // SHIMS ------------------------------
 var global = window;
-function setImmediate(){}
+//function setImmediate(){}
+
+// Revivable.class.js ------------------------------
+
+class Revivable {
+    toJSON(){
+        var obj = {},
+            self = this;
+        for ( let k in self ){
+            obj[k] = self[k];
+        }
+        obj._type = this.constructor.name;
+        return obj;
+    }
+    revive(object){
+        for ( let k in object ){
+            this[k] = object[k];
+        }
+        return this;
+    }
+}
+
+
 
 // Component.class.js ------------------------------
 
-class Component{
+
+class Component extends Revivable {
 
     constructor(options){
+
+        super(options);
+
         if ( !options ){
             options = {};
         }
+
+        this.options = options;
+
         this.name = "Component";
         this.entity = options.entity;
         this.game = (this.entity && this.entity.game) ? this.entity.game : options.game;
@@ -68,35 +97,14 @@ class Transform extends Component{
 
 
 
-// Renderer.class.js ------------------------------
-
-
-class Renderer extends Component{
-    constructor(options){
-        super(options);
-        this.name = "Renderer";
-        this.type = options.rendererType || "Rectangle";
-        this.source = "https://placeholdit.imgix.net/~text?txtsize=47&bg=ff0000&txtclr=ffffff&txt=ABCD&w=300&h=300";
-        this.color = options.color || "#"+((1<<24)*Math.random()|0).toString(16);
-    }
-
-    getLiteral(){
-        return {
-            type: this.type,
-            source: this.image,
-            color: this.color
-        };
-    }
-}
-
-
-
 // Entity.class.js ------------------------------
 
 
-class Entity{
+class Entity extends Revivable {
 
     constructor(options){
+        super(options);
+        this.options = options;
 
         this.components = [];
         this.game = options.game;
@@ -291,9 +299,11 @@ class Entity{
 
 // Physics.class.js ------------------------------
 
-class Physics{
+
+class Physics extends Revivable{
 
     constructor(options){
+        super(options);
         this.name = "Physics";
 
         this.gravityEnabled = true;
@@ -452,9 +462,10 @@ function pointsToLineFormula(p1, p2){
 
 // http://gamedevelopment.tutsplus.com/tutorials/quick-tip-use-quadtrees-to-detect-likely-collisions-in-2d-space--gamedev-374
 
-class Quadtree {
-    constructor(options){
 
+class Quadtree extends Revivable {
+    constructor(options){
+        super(options);
         this.color = this.getRandomColor();
 
         this.maxObjects = 1;
@@ -638,6 +649,29 @@ class Quadtree {
             color += letters[Math.floor(Math.random() * 9)];
         }
         return color;
+    }
+}
+
+
+
+// Renderer.class.js ------------------------------
+
+
+class Renderer extends Component{
+    constructor(options){
+        super(options);
+        this.name = "Renderer";
+        this.type = options.rendererType || "Rectangle";
+        this.source = "https://placeholdit.imgix.net/~text?txtsize=47&bg=ff0000&txtclr=ffffff&txt=ABCD&w=300&h=300";
+        this.color = options.color || "#"+((1<<24)*Math.random()|0).toString(16);
+    }
+
+    getLiteral(){
+        return {
+            type: this.type,
+            source: this.image,
+            color: this.color
+        };
     }
 }
 
@@ -902,9 +936,12 @@ class Rigidbody extends Component{
 
 // Time.class.js ------------------------------
 
-class Time {
 
-    constructor() {
+class Time extends Revivable {
+
+    constructor(options) {
+        super(options);
+        this.options = options;
         this._currentFrameTime = new Date().getTime();
         this._lastFrameTime = new Date().getTime();
         this.step();
@@ -927,41 +964,15 @@ class Time {
 
 
 
-// PhysicsEntity.class.js ------------------------------
-
-
-class PhysicsEntity extends Entity {
-    constructor(options){
-        super(options);
-
-        var kinematic = options.isKinematic || false,
-            useGravity = options.useGravity || false,
-            color = options.color || "#FFFFFF";
-
-        var rendererComponent = new Renderer({
-                rendererType: options.rendererType,
-                color: color
-            }),
-            colliderComponent = new Collider({}),
-            transformComponent = this.GetComponent("Transform");
-
-        var rigidbodyComponent = new Rigidbody({transform: transformComponent, collider: colliderComponent});
-
-        rigidbodyComponent.isKinematic = kinematic;
-        rigidbodyComponent.useGravity = useGravity;
-
-        this.addComponents([rendererComponent, colliderComponent, rigidbodyComponent]);
-    }
-}
-
-
-
 // Game.class.js ------------------------------
 
 
-class Game {
+class Game extends Revivable {
 
     constructor(options){
+        super(options);
+        this.options = options;
+
         // properties
         this.thisFrameTime = new Date().getTime();
         this.lastFrameTime = new Date().getTime();
@@ -993,8 +1004,14 @@ class Game {
             }
         };
 
-        // the main
-        setImmediate(this.Update, this);
+        // the Game Loop
+        if ( typeof setImmediate == 'function' ){
+            // if we have access to setImmediate use it
+            setImmediate(this.Update, this);
+        } else {
+            // else use timeout at 60hz
+            setTimeout(this.Update.bind(this, this), 16);
+        }
     }
 
     get entities () {
@@ -1020,11 +1037,17 @@ class Game {
             }
         });
 
-        scope.debug = [];
         scope.debug = scope.quad.getBounds();
 
         scope.Time.step();
-        setImmediate(scope.Update, scope);
+
+        if ( typeof setImmediate == 'function' ){
+            // if we have access to setImmediate use it
+            setImmediate(scope.Update, scope);
+        } else {
+            // else use timeout at 60hz
+            setTimeout(scope.Update.bind(scope, scope), 16);
+        }
     }
 
     getEntityByName(name){
@@ -1081,8 +1104,10 @@ class Game {
 
 // Client.class.js ------------------------------
 
-class Client{
+
+class Client extends Revivable{
     constructor(options){
+        super(options);
         this.name = "Client";
         this.input = {
             up: false,
@@ -1116,6 +1141,35 @@ class Client{
 
     Update() {
         this.lastInput = this.input;
+    }
+}
+
+
+
+// PhysicsEntity.class.js ------------------------------
+
+
+class PhysicsEntity extends Entity {
+    constructor(options){
+        super(options);
+
+        var kinematic = options.isKinematic || false,
+            useGravity = options.useGravity || false,
+            color = options.color || "#FFFFFF";
+
+        var rendererComponent = new Renderer({
+                rendererType: options.rendererType,
+                color: color
+            }),
+            colliderComponent = new Collider({}),
+            transformComponent = this.GetComponent("Transform");
+
+        var rigidbodyComponent = new Rigidbody({transform: transformComponent, collider: colliderComponent});
+
+        rigidbodyComponent.isKinematic = kinematic;
+        rigidbodyComponent.useGravity = useGravity;
+
+        this.addComponents([rendererComponent, colliderComponent, rigidbodyComponent]);
     }
 }
 
